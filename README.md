@@ -5,8 +5,12 @@ Not designed to be stealthy, but it's for sure possible! This is a demo in Pytho
 
 You need to build the uihack python file to an executable, make sure it stays in *dist* folder. Once you created the uihack executable, you can launch uiap.py from a non-elevated command prompt.
 
-* `python build.py uihack.py`
-* `python uiap.py`
+## Build with py2exe:
+In order for a successful build, install the py2exe (http://www.py2exe.org) module and use the provided build.py script to compile all the scripts in to a portable executable. This only seems to work on Python 2, not on Python 3.
+
+```python build.py uihack.py```
+
+```python build.py uiap.py```
 
 #### Creds to:
  * https://tyranidslair.blogspot.com/2019/02/accessing-access-tokens-for-uiaccess.html
