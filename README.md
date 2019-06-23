@@ -3,10 +3,10 @@ In this example, we start a host process (msra.exe) that we steal the UIAccess t
 
 Not designed to be stealthy, but it's for sure possible! This is a demo in Python, just to display how it works.
 
-You need to build the uihack python file to an executable, make sure it stays in *dist* folder. Once you created the uihack executable, you can launch uiaccess.py from a non-elevated command prompt.
+You need to build the uihack python file to an executable, make sure it stays in *dist* folder. Once you created the uihack executable, you can launch uiap.py from a non-elevated command prompt.
 
 * `python build.py uihack.py`
-* `python uiaccess.py`
+* `python uiap.py`
 
 #### Creds to:
  * https://tyranidslair.blogspot.com/2019/02/accessing-access-tokens-for-uiaccess.html
