@@ -5,28 +5,28 @@ import sys
 import os
 
 class ShellExecInfo(ctypes.Structure):
-	_fields_ = [("cbSize", 		 ctypes.c_uint32),
-				("fMask",		 ctypes.c_ulong),
-				("hwnd", 		 ctypes.c_void_p),
-				("lpVerb", 		 ctypes.c_wchar_p),
-				("lpFile", 		 ctypes.c_wchar_p),
-				("lpParameters", ctypes.c_wchar_p),
-				("lpDirectory",  ctypes.c_wchar_p),
-				("nShow", 		 ctypes.c_int),
-				("hInstApp", 	 ctypes.c_void_p),
-				("lpIDList", 	 ctypes.c_void_p),
-				("lpClass", 	 ctypes.c_wchar_p),
-				("hKeyClass", 	 ctypes.c_void_p),
-				("dwHotKey", 	 ctypes.c_uint32),
-				("hIcon", 	 	 ctypes.c_void_p),
-				("hProcess", 	 ctypes.c_void_p)]
+	_fields_ = [("cbSize", 	 ctypes.c_uint32),
+		("fMask",	 ctypes.c_ulong),
+		("hwnd",	 ctypes.c_void_p),
+		("lpVerb",	 ctypes.c_wchar_p),
+		("lpFile",	 ctypes.c_wchar_p),
+		("lpParameters", ctypes.c_wchar_p),
+		("lpDirectory",  ctypes.c_wchar_p),
+		("nShow", 	 ctypes.c_int),
+		("hInstApp", 	 ctypes.c_void_p),
+		("lpIDList", 	 ctypes.c_void_p),
+		("lpClass", 	 ctypes.c_wchar_p),
+		("hKeyClass", 	 ctypes.c_void_p),
+		("dwHotKey", 	 ctypes.c_uint32),
+		("hIcon", 	 ctypes.c_void_p),
+		("hProcess", 	 ctypes.c_void_p)]
 
 
 class PROCESS_INFORMATION(ctypes.Structure):
     _fields_ = [("hProcess", 	 ctypes.c_void_p),
-				("hThread", 	 ctypes.c_void_p),
-				("dwProcessId",  ctypes.c_ulong),
-				("dwThreadId", 	 ctypes.c_ulong)]
+		("hThread", 	 ctypes.c_void_p),
+		("dwProcessId",  ctypes.c_ulong),
+		("dwThreadId", 	 ctypes.c_ulong)]
 
 
 class disable_fsr():
@@ -92,8 +92,8 @@ class uihack():
 		self.VK_RIGHT	= 0x27
 		self.VK_LEFT 	= 0x25
 		self.VK_DOWN 	= 0x28
-		self.VK_UP 		= 0x26
-		self.VK_TAB		= 0x09	
+		self.VK_UP 	= 0x26
+		self.VK_TAB	= 0x09	
 
 
 	def keybd_event(self, keycode):
