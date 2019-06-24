@@ -256,6 +256,6 @@ class uihack():
 			print "[Debug] Unable to start host process, cannot proceed"
 			return False
 
-uihack().rstrui("c:\\windows\\system32\\cmd.exe")
+#uihack().rstrui("c:\\windows\\system32\\cmd.exe")
 #uihack().taskmgr()
-#uihack().msconfig()
+uihack().msconfig()
