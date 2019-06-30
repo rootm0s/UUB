@@ -107,7 +107,8 @@ class uihack():
 				return True
 			else:
 				return False
-		return False
+		else:
+			return False
 
 	def host_process(self, process, params):
 		shinfo = ShellExecInfo()
