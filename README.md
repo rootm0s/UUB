@@ -5,6 +5,8 @@ Not designed to be stealthy, but it's for sure possible! This is a demo in Pytho
 
 You need to build the uihack python file to an executable, make sure it stays in *dist* folder. Once you created the uihack executable, you can launch uiap.py from a non-elevated command prompt.
 
+[![Msconfig demo video](https://i.imgur.com/wv40H4Y.png)](https://vimeo.com/344744930 "Msconfig demo video")
+
 Here's a few methods, showing how hijacking UIAccess tokens can be used to bypass UAC.
 
 ### Rstrui method:
