@@ -3,7 +3,7 @@ In these examples, we start a host process (msra.exe) that we steal the UIAccess
 
 Not designed to be stealthy, but it's for sure possible! This is a demo in Python, just to display how it works.
 
-You need to build the uihack python file to an executable, make sure it stays in *dist* folder. Once you created the uihack executable, you can launch uiap.py from a non-elevated command prompt.
+You need to build the uihack python file to an executable, make sure it stays in *dist* folder. Once you created the uihack executable, you can launch uub.py from a non-elevated command prompt.
 
 ### Demo:
 [![Msconfig demo video](https://i.imgur.com/wv40H4Y.png)](https://vimeo.com/344744930 "Msconfig demo video")
