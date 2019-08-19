@@ -11,7 +11,7 @@ You need to build the uihack python file to an executable, make sure it stays in
 Here's a few methods, showing how hijacking UIAccess tokens can be used to bypass UAC.
 
 ### Rstrui method:
-This executable is running elevated by default. Since rstrui executable is vulnerable to class hijacking, we use that to spawn our executable which is defined inside uihack file. In order to trigger the hijack, we need to send keyboard events to the window. Upon success, a elevated console window or custom executable should appear.
+This executable is running elevated by default. Since rstrui executable is vulnerable to class hijacking, we use that to spawn our executable which is defined inside uihack file. In order to trigger the hijack, we need to send keyboard events to the window. Upon success, a elevated console window or custom executable should appear. Read more here https://rootm0s.github.io/researching-rstrui-process
 
 ### Taskmgr method:
 This executable is running elevated by default, we send keyboard events to the window in order to launch an elevated console using the "Run new task" feature in Task Manager. Upon success, a elevated console window should appear.
